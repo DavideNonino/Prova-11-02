@@ -32,9 +32,6 @@ def moveXYZ(the_connection, x = 0, y = 0, z = 0, vx = 0, vy = 0, vz = 0):
                     0, 0, 0,   # Acceleration (opzionale)
                     0,0 #Yaw
                 )
-
-                time.sleep(5)
-
                 print(f"Comando inviato per spostare il drone.")
 
 
@@ -126,5 +123,5 @@ if __name__ == "__main__":
     #time.sleep(2)
     #takeoff.takeoff(the_connection,20)
     #time.sleep(30)
-    moveXYZ( the_connection, x = 10 )
+    moveXYZ( the_connection, y = 35 )
 

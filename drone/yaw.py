@@ -20,6 +20,15 @@ def set_yaw( the_connection, yaw: float, yaw_speed: float = 10, direction: int =
         set_yaw_ack = the_connection.recv_match(type='COMMAND_ACK', blocking=True, timeout=10)
         if set_yaw_ack:
             print(f"Set Yaw ACK:  {set_yaw_ack}")
+            tolerance = 0.5  # Tolleranza in gradi per determinare quando la rotazione è completata
+            while True:
+                # Ricevi i dati di attitudine
+                msg = the_connection.recv_match(type='ATTITUDE', blocking=True, timeout=10)
+                
+                # Ottieni il valore di yaw (in radianti, quindi convertilo in gradi)
+                current_yaw = msg.yaw * 180 / 3.14159265  # Converti da radianti a gradi
+                
+                print(current_yaw)
 
         else:
             print("Errore, YAW ACK non ricevuto")
@@ -31,4 +40,4 @@ def set_yaw( the_connection, yaw: float, yaw_speed: float = 10, direction: int =
 
 if __name__ == "__main__":
     the_connection = connect.connect('udpin:127.0.0.1:5760',10)
-    set_yaw(the_connection,270)
+    set_yaw(the_connection,25)
